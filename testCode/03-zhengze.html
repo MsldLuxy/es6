@@ -36,6 +36,14 @@
             console.log(/\u{61}/u.test('a'));  true
 
         }
+
+        {
+            let s = 'ababbabbb';
+            let reg = /b+/g;
+            let reg2 = /b+/y;
+            console.log(reg.exec(s), reg2.exec(s));
+            console.log(reg.exec(s), reg2.exec(s));
+        }
     </script>
  </body>
 </html>
