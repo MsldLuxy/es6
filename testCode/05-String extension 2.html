@@ -57,11 +57,58 @@
                 return str + v1 + v2;
             }
         }
+        {
+            const total = 30;
+            let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
+            console.log(msg);
+            function passthru(literals) {
+                console.log(literals); //["The total is ", " (", " with tax)", raw: Array(3)]
+                console.log(arguments); //Arguments(3) [Array(3), 30, 31.5, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+                let result = "";
+                let i = 0;
+                while(i < literals.length){
+                    result += literals[i++];
+                    if(i < arguments.length){
+                        result += arguments[i];
+                    }
+                }
+                return result;
+            }
+        }
+        {
+            let sender = 'luxy';
+            let msg = safer`<p>${sender} has sent you a message.</p>`;
+            console.log(msg);
+            function safer(tem) {
+                console.log(tem);
+                let s = tem[0];
+                for(var i=0; i<arguments.length; i++){
+                    let arg = String(arguments[i]);
+                    s += arg.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;");
+
+                    s += tem[i];
+                }
+                return s;
+            }
+        }
+
         //raw
         {
             console.log(String.raw`Hi\n${2+3}`); //Hi\n5
             console.log(`Hi\n${2+3}`); //Hi
                                        //5
+        }
+
+        foo(1);
+
+        function foo(a) {
+
+            var b = 2;
+            bar();
+            function bar() {
+                console.log(c);
+            }
+            var c = 3;
 
         }
     </script>

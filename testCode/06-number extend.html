@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="不会爬树的鱼">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Title</title>
+    <style>
+        body,div,ul,li,ol,p,span,h1,h2,h3,h4,h5,h6,a,img,table,form{margin:0;padding:0;}
+        body{font:16px/1.5 "Microsoft Yahei" ;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .clearfix:after{content:''; display:block; clear:both;}
+        
+    </style>
+ </head>
+ <body>
+ 
+    <script>
+
+        //"use strict";
+        //这是表示使用严格模式
+
+        //二进制和八进制的表示方法
+        {
+            console.log(0b111110111); // 二进制 以0b开头  b不区分大小写
+            console.log(0o767); //八进制 以0o开头 o不区分大小写
+            console.log(0o11 === 011); //严格模式下这会报错Uncaught SyntaxError: Octal literals are not allowed in strict mode.
+                                        //非严格模式下为true
+
+            console.log(Number('0b111')); //7
+            console.log(Number('0o10'));//8
+            //将使用0b或者0o前缀的字符串数值转为十进制数值，要使用Number方法
+        }
+
+        console.log('\n')
+
+        {
+            //Number.isFinite() 检查一个数值是否非无穷
+            console.log(Number.isFinite(1));//T
+            console.log(Number.isFinite(0));//T
+            console.log(Number.isFinite(1/0));//F
+            console.log(Number.isFinite(NaN));//F
+            console.log(Number.isFinite(true));//F
+            console.log(Number.isFinite('1'));//F
+            console.log(isFinite('1'));//T
+            //传统方法isFinite()是先调用Number()将非数值转为数值，再判断，而新的方法只对数值有效，对于非数值一律返回false
+            //还有Number.isNaN也是一样
+        }
+
+        console.log('\n')
+        {
+            //判断是否为整数
+            console.log(Number.isInteger(25));//T
+            console.log(Number.isInteger(25.0));//T
+            console.log(Number.isInteger(25.1));//F
+            console.log(Number.isInteger('25'));//F
+        }
+        console.log('\n')
+        {
+            console.log(Number.MAX_SAFE_INTEGER,Number.MIN_SAFE_INTEGER);
+            console.log(Number.isSafeInteger(3));//T
+            console.log(Number.isSafeInteger(3.1));//F
+        }
+
+
+
+    </script>
+ </body>
+</html>
