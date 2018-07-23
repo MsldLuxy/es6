@@ -25,6 +25,42 @@
             console.log('s', `\u20BB7`); //s ₻7
             console.log('s', `\u{20BB7}`); //s 𠮷
         }
+
+        {
+            let s = '𠮷';
+            console.log(s.length);
+            console.log(s.charAt(0));
+            console.log(s.charAt(1));
+            console.log(s.charCodeAt(0));
+            console.log(s.charCodeAt(1));
+
+            let s1 = '𠮷a';
+            console.log(s1.length);
+            console.log(s1.codePointAt(0));
+            console.log(s1.codePointAt(0).toString(16));
+            console.log(s1.codePointAt(1));
+            console.log(s1.codePointAt(1).toString(16));
+            console.log(s1.codePointAt(2));
+            console.log(s1.codePointAt(2).toString(16));
+        }
+
+        {
+            console.log(String.fromCharCode("0x20bb7"));
+            console.log(String.fromCodePoint("0x20bb7"));
+            console.log(String.fromCharCode("0x61"));
+        }
+
+        {
+            let str = '\u{20bb7}abc';
+            for(let i=0; i<str.length; i++){
+                console.log(str[i]);
+            }
+
+            //使用for...of就可以识别大于0xFFFF的码点
+            for(let code of str){
+                console.log(code);
+            }
+        }
     </script>
  </body>
 </html>

@@ -19,7 +19,51 @@
  <body>
  
     <script>
-        var a = 1;
+        {
+            let str = 'String';
+            console.log('includes',str.includes('S')); //true
+            console.log('start',str.startsWith('str')); // false
+            console.log('end',str.endsWith('ng')); // true
+
+        }
+        {
+            console.log('abc'.repeat(3)); //abcabcabc
+            console.log('abc'.repeat(2.4)); //abcab
+            console.log('abc'.repeat(0)); //""
+            console.log('abc'.repeat(-0.7)); //""
+           // console.log('abc'.repeat(-1)); //报错
+        }
+
+        {
+            let name = 'list';
+            let info = 'hello world';
+            let m = `i am ${name},${info}`;
+            console.log(m);
+        }
+
+        {
+            console.log('1'.padStart(2,'0')); //两个参数  第一个是长度  不够时用后面的补齐  补在前面的  用于日期补齐等很有用
+            console.log('1'.padEnd(2,'0')); //补在后面的
+        }
+
+
+        //标签模板
+        {
+            let name = 'Luxy';
+            let info = 'hello world';
+            console.log(abc`My name is ${name}, ${info} `); //My name is ,, , Luxyhello world
+            function abc(str, v1, v2) {
+                console.log(str, v1, v2); //["My name is ", ", ", " ", raw: Array(3)] "Luxy" "hello world"
+                return str + v1 + v2;
+            }
+        }
+        //raw
+        {
+            console.log(String.raw`Hi\n${2+3}`); //Hi\n5
+            console.log(`Hi\n${2+3}`); //Hi
+                                       //5
+
+        }
     </script>
  </body>
 </html>
