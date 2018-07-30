@@ -20,7 +20,73 @@
  
     <script>
         {
-            let a = 1;
+           var a = {n:1};
+           var b = a;
+           a.x = a = {n:2};
+           console.log(a.x, b.x);
+           console.log(a, b);
+        }
+
+    </script>
+
+    <script>
+        console.log('\n');
+        {
+            function test(x, y = 'world') {
+                console.log(x,y);
+            }
+            test('hello');
+            test('hello', 'kill')
+        }
+
+        //作用域
+        console.log('\n');
+        {
+            let x = 1;
+            function f(x, y=x) {
+                console.log(y);
+            }
+            f(2);
+        }
+        {
+            let x = 1;
+            function f(y=x) {
+                let x=2;
+                console.log(y);
+            }
+            f();
+        }
+
+
+        //rest参数
+        console.log('\n');
+        {
+            function test(...arg) {
+                for(let i of arg){
+                    console.log(i);
+                }
+            }
+            test(1,2,3,4,'a');
+        }
+
+        //扩展运算符
+        console.log('\n');
+        {
+            console.log(...[1,2,3,4]);
+        }
+
+        //箭头函数
+        console.log('\n');
+        {
+            let arrow = v => v*2;
+            console.log(arrow(3));
+        }
+        {
+            var a = (...x) => {
+
+                return x.map(t => t-1);
+            }
+            console.log(a(1,2,3));
         }
     </script>
  </body>
