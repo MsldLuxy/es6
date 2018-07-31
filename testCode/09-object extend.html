@@ -17,7 +17,35 @@
     </style>
  </head>
  <body>
- 
+
+    <script>
+        var foo = {n:1};
+        (function (foo) {
+            console.log(foo.n);
+            foo.n = 3;
+            var foo = {n:2};
+            console.log(foo.n);
+        })(foo);
+        console.log(foo.n);
+
+        var arr = [2, 1, 4, 3];
+        console.log(Math.max(arr));
+        console.log(Math.max(arr[0],arr[1],arr[2],arr[3]));
+        console.log(Math.max.call(Math,arr[0],arr[1],arr[2],arr[3]));
+        console.log(Math.max.apply(Math, arr));
+
+        var add = new Function('a', 'b', 'return a+b');
+        console.log(add(1,2));
+
+        //typeof主要用于检测基本数据类型，instanceof操作符是用来检测引用类型的，若用来检测基本类型的值时，都会返回false
+        var a = new String('hi');
+        var b = 'hi';
+        console.log(typeof a == 'string', typeof b == 'string');//false true
+        console.log(a instanceof String, b instanceof String); //true false
+        console.log(typeof 'hello');//String
+        console.log(typeof new String('hello'));//Object
+    </script>
+
     <script>
         {
             //属性表达式
@@ -32,7 +60,16 @@
                 [a] : 'ccc'
             }
             console.log(es5_obj,es6_obj);
+        }
 
+        {
+            let obj = {
+                o: 'aaa',
+                k: 'bbb'
+            }
+            for(let [key, value] of Object.entries(obj)){
+                console.log([key, value]);
+            }
         }
     </script>
  </body>
