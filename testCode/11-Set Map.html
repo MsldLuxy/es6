@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="不会爬树的鱼">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Title</title>
+    <style>
+        body,div,ul,li,ol,p,span,h1,h2,h3,h4,h5,h6,a,img,table,form{margin:0;padding:0;}
+        body{font:16px/1.5 "Microsoft Yahei" ;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .clearfix:after{content:''; display:block; clear:both;}
+        
+    </style>
+ </head>
+ <body>
+ 
+    <script>
+        {
+            let list = new Set();
+            list.add(5);
+            list.add(7);
+            console.log('size',list.size);
+        }
+        {
+            let arr = [1,2,3,4,5];
+            let list = new Set(arr);
+            console.log('size', list.size);
+        }
+        {
+            let list = new Set();
+            list.add(1);
+            list.add(2);
+            list.add(1);
+            console.log(list);
+
+            let arr = [1,2,3,1,2];
+            let list2 = new Set(arr);
+            console.log('unique', list2);//[1, 2, 3]
+            console.log(list2.delete(1)); //true
+            console.log(list2); //[2, 3]
+            console.log(list2.has(2),list2.has(1));//true false
+            console.log(list2.clear());//undefined
+        }
+
+        {
+            let set = new Set(['a', 'b', 'c']);
+            for(let item of set.values()){
+                console.log(item);
+            }
+            for(let item of set.keys()){
+                console.log(item);
+            }
+            for(let item of set.entries()){
+                console.log(item);
+            }
+            for(let item of set){
+                console.log(item);
+            }
+            set.forEach(function (item) {
+                console.log(item);
+            })
+        }
+        {
+            let set = new Set(['red', 'green', 'blue']);
+            let arr = [...set];
+            console.log(arr);//["red", "green", "blue"]
+            console.log(...set);//red green blue
+        }
+
+        {
+            let arr = [1,2,3,1,2];
+            let unique = [...new Set(arr)];
+            console.log(unique);
+        }
+
+        {
+            //用Set实现并集，交集，差集
+
+            let a = new Set([1,2,3]);
+            let b = new Set([2,3,4]);
+            console.log('bingji',new Set([...a,...b]));//1234
+            console.log('jiaoji',new Set([...a].filter(x => b.has(x))));//23
+            console.log('chaji',new Set([...a].filter(x => !b.has(x))));//1   a中有但b中没有的
+        }
+
+        {
+            let weakList = new WeakSet();
+//            weakList.add(1); // 报错  weakSet的成员只能是对象
+            let  a = [[1,2], {n:1,k:2}];
+            weakList.add(a);
+            console.log(weakList);
+        }
+
+        {
+            let map = new Map();
+            let a = {n:1};
+            let b = ['123'];
+            map.set(a,'123');
+            map.set(b,'456');
+            console.log(map,map.get(a),map.size);
+        }
+
+        {
+            let map = new Map([['a',123],['b',456]]);
+            console.log(map);
+        }
+    </script>
+ </body>
+</html>
