@@ -90,6 +90,17 @@
            let {title: esTitle, test:[{title: cnTitle}]} = metaData;
            console.log(esTitle, cnTitle);
         }
+
+        {
+            //数值和布尔值的解构赋值时
+            let {toString: s} = 123;//先把数值或者布尔值转为对象  Number和Boolean中有toString这个属性 再赋值
+            console.log(s === Number.prototype.toString);//true
+            let {toString: b} = true;//先把数值或者布尔值转为对象  Number和Boolean中有toString这个属性 再赋值
+            console.log(b === Boolean.prototype.toString);//true
+
+            let {p: a} = {p: 1};
+            console.log(a); //1
+        }
     </script>
  </body>
 </html>

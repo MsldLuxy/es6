@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="不会爬树的鱼">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Title</title>
+    <style>
+        body,div,ul,li,ol,p,span,h1,h2,h3,h4,h5,h6,a,img,table,form{margin:0;padding:0;}
+        body{font:16px/1.5 "Microsoft Yahei" ;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .clearfix:after{content:''; display:block; clear:both;}
+        
+    </style>
+ </head>
+ <body>
+ 
+    <script>
+        {
+            //map和数组的对比
+            let map = new Map();
+            let arr = [];
+
+             //增
+            map.set('t',1);
+            arr.push({t:1});
+            console.log(map,arr);
+
+            //查
+            let map_exist = map.has('t');
+            let arr_exist = arr.find(item => item.t);
+            console.log(map_exist, arr_exist);//true {t:1}
+
+            //改
+            map.set('t',2);
+            arr.forEach(item => item.t ? item.t = 2: '');
+            console.log(map,arr);
+
+            //删
+            map.delete('t');
+            let index = arr.findIndex(item => item.t);
+            arr.splice(index, 1);
+            console.log(map,arr);
+
+        }
+
+        {
+            //set和数组的对比
+            let set = new Set();
+            let arr = [];
+
+            //增
+            let obj = {t:1};
+            set.add(obj);
+            arr.push(obj);
+            console.log(set,arr);
+
+            //查
+            let set_exist = set.has(obj);
+            let arr_exist = arr.find(item => item.t);
+            console.log(set_exist, arr_exist);
+
+            //改
+            set.forEach(item => item.t ? item.t = 2 : '');
+            arr.forEach(item => item.t ? item.t = 2 : '');
+            console.log(set, arr);
+
+            //删
+            set.forEach(item => item.t ? set.delete(item) : '');
+            let index = arr.findIndex(item => item.t);
+            arr.splice(index, 1);
+            console.log(set, arr);
+        }
+    </script>
+ </body>
+</html>
