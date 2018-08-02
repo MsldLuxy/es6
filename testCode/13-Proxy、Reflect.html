@@ -19,7 +19,85 @@
  <body>
  
     <script>
-        
+        {
+            let obj = {
+                time: '2018-8-2',
+                name: 'net',
+                _t: 123
+            };
+
+            let monitor = new Proxy(obj, {
+                //拦截对象属性的读取
+                get(target,key){
+                    if(key === 'time'){
+                        return target[key].replace('2017', '2018');
+                    }else{
+                        return target[key].replace('lx', 'xl');
+                    }
+                },
+                //拦截对象设置属性
+                set(target,key,value){
+                    //只有设置的属性是name的时候才会有效
+                    if(key === 'name'){
+                        return target[key] = value;
+                    }else{
+                        return target[key];
+                    }
+                },
+
+                //拦截key in object操作吧
+                has(target, key){
+                    if(key === 'name'){
+                        return target[key];
+                    }else{
+                        return false;
+                    }
+                },
+
+                //拦截delete
+                deleteProperty(target, key){
+                    //属性以_开头的才删除
+                    if(key.indexOf('_') === 0){
+                        delete target[key];
+                        return true;
+                    }else {
+                        return target[key];
+                    }
+                },
+
+                //拦截Object.getOwnPropertyNames(Proxy),Object.getOwnPropertySymbols(Proxy),Object.keys(Proxy)
+                ownKeys(target){
+                    return Object.keys(target).filter(item => item!='name');//返回不是name的属性
+                }
+            });
+
+            monitor.time = 2019;
+            monitor.name = 'lx';
+            console.log(monitor.time, monitor.name);
+
+            console.log('has', 'name' in monitor,'time' in monitor);
+
+           /* delete monitor._t;
+            console.log(monitor);*/
+
+           console.log('ownKeys', Object.keys(monitor));
+
+        }
+
+        console.log('\n');
+        {
+            let obj = {
+                time: '2018-8-2',
+                name: 'net',
+                _t: 123
+            };
+
+            //Reflect用法和Proxy用法差不多 Proxy有的方法Reflect都有  直接Reflect不用new
+            console.log('reflect get', Reflect.get(obj, 'time'));
+
+            Reflect.set(obj, 'name', 'lx');
+            console.log(obj);
+        }
     </script>
  </body>
 </html>
