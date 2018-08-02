@@ -74,6 +74,41 @@
             arr.splice(index, 1);
             console.log(set, arr);
         }
+
+        {
+            //map、set和对象对比
+            let map = new Map();
+            let set = new Set();
+            let obj = {};
+            let item = {k:1};
+
+            //增
+            map.set('k',1);
+            set.add(item);
+            obj['k'] = 1;
+            console.log(map, set, obj);
+
+            //查
+            console.info({
+                map_exist: map.has('k'),
+                set_exist: set.has(item),
+                obj_exist: 'k' in obj
+            })
+
+            //改
+            map.set('k', 2);
+            item.k = 2;
+            obj['k'] = 2;
+            console.log(map, set, obj);
+
+            //删
+            map.delete('k');
+            set.delete(item);
+            delete obj['k'];
+            console.log(map, set, obj);
+
+
+        }
     </script>
  </body>
 </html>
