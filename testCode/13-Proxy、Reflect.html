@@ -97,6 +97,55 @@
 
             Reflect.set(obj, 'name', 'lx');
             console.log(obj);
+
+            console.log(Reflect.has(obj, 'name'));//true
+        }
+        
+        
+        {
+            function validator(target, validator) {
+                return new Proxy(target,{
+                    _validator: validator,
+                    set(target, key, value, proxy){
+                        if(target.hasOwnProperty(key)){
+                            let va = this._validator[key];
+                            if(!!va(value)){
+                                return Reflect.set(target, key, value, proxy);
+                            }else {
+                                throw Error(`不能设置${target[key]}为${value}`);
+                            }
+                        }else {
+                            throw Error(`${key}不存在`);
+                        }
+
+                    }
+                })
+            }
+
+            const personValidator = {
+                name: function (val) {
+                    return typeof val === 'string';
+                },
+                /*name(val){
+                    return val === 'string';
+                },*/
+                age(val){
+                    return val === 'number' && val > 18;
+                }
+            }
+
+            class Person{
+                constructor(name, age){
+                    this.name = name;
+                    this.age = age;
+                    return validator(this,personValidator);
+                }
+            }
+
+            let person = new Person('lx',20);
+
+            person.name = 'lllx';
+            console.log(person);
         }
     </script>
  </body>
