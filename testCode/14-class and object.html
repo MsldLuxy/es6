@@ -19,7 +19,87 @@
  <body>
  
     <script>
-        
+        {
+            class Parent{
+                constructor(name='parent'){
+                    this.name = name;
+                }
+            }
+
+            let _parent = new Parent('v');
+            console.log(_parent);
+        }
+
+        //继承
+        {
+            class Parent{
+                constructor(name='parent'){
+                    this.name = name;
+                }
+            }
+            class Child extends Parent{
+
+            }
+            console.log(new Child());
+        }
+
+        //继承传递参数
+        {
+            class Parent{
+                constructor(name='parent'){
+                    this.name = name;
+                }
+            }
+            class Child extends Parent{
+                constructor(name = 'child'){
+
+                    //子类中有自己是属性设置时必须放在super的后面 也就是说super必须放在第一行
+                    super(name);
+                    this.type = 'type';
+                }
+
+            }
+            console.log(new Child('hello'));
+        }
+
+        {
+            //getter setter
+            class Parent {
+                constructor(name = 'Parent'){
+                    this.name = name
+                }
+
+                get longName(){
+                    return 'get ' + this.name;
+                }
+
+                set longName(val){
+                    this.name = val;
+                }
+            }
+
+            let parent = new Parent();
+            console.log(parent.longName);
+            parent.longName = 'hello';
+            console.log(parent.longName);
+        }
+
+        {
+            //静态方法
+            class Parent {
+                constructor(name){
+                    this.name = name;
+                }
+
+                static tell(){
+                    return 'tell';
+                }
+            }
+
+            console.log(Parent.tell());
+            let parent = new Parent();
+            //console.log(parent.tell());//报错
+        }
     </script>
  </body>
 </html>
