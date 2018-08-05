@@ -100,8 +100,21 @@
             let parent = new Parent();
             //console.log(parent.tell());//报错
         }
-        {
 
+        //静态属性
+        {
+            class Parent {
+                constructor(name){
+                    this.name = name;
+                }
+
+                static tell(){
+                    return 'tell';
+                }
+            }
+
+            Parent.propName = 'jingtai';
+            console.log(Parent.propName);
         }
     </script>
  </body>

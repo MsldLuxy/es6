@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="不会爬树的鱼">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Title</title>
+    <style>
+        body,div,ul,li,ol,p,span,h1,h2,h3,h4,h5,h6,a,img,table,form{margin:0;padding:0;}
+        body{font:16px/1.5 "Microsoft Yahei" ;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .clearfix:after{content:''; display:block; clear:both;}
+        
+    </style>
+ </head>
+ <body>
+ 
+    <script>
+        {
+            let ajax = function(callback){
+                console.log('执行');
+                setTimeout(() => {
+                    callback && callback.call();
+                },1000)
+            }
+            ajax(() => {
+                console.log('timeout1');
+            })
+        }
+
+        {
+            function ajax() {
+                return new Promise(function (resolve, reject) {
+                  setTimeout(() => {
+                      resolve();
+                  }, 2000)
+                })
+            }
+
+            ajax().then(function () {
+                console.log('promise2', 'timeout2');
+            })
+        }
+    </script>
+ </body>
+</html>
