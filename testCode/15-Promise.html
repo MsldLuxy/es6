@@ -44,6 +44,29 @@
                 console.log('promise2', 'timeout2');
             })
         }
+        
+        {
+            //promise串行
+            function ajax() {
+                console.log('111');
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve();
+                    },2000)
+                })
+            }
+
+            ajax().then(function () {g
+                console.log('222');
+                return new Promise(function (resolve, reject) {
+                    setTimeout(() => {
+                        resolve();
+                    },2000);
+                }).then(() => {
+                    console.log('333');
+                })
+            })
+        }
     </script>
  </body>
 </html>
