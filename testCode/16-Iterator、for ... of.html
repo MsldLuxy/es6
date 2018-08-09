@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="不会爬树的鱼">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Title</title>
+    <style>
+        body,div,ul,li,ol,p,span,h1,h2,h3,h4,h5,h6,a,img,table,form{margin:0;padding:0;}
+        body{font:16px/1.5 "Microsoft Yahei" ;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .clearfix:after{content:''; display:block; clear:both;}
+        
+    </style>
+ </head>
+ <body>
+ 
+    <script>
+        {
+            let arr = ['hello', 'world'];
+            let iter = arr[Symbol.iterator]();
+            console.log(iter.next());
+            console.log(iter.next());
+            console.log(iter.next());
+
+            for(let i of arr){
+                console.log(i);
+            }
+        }
+
+        //只有数组、某些类似数组的对象、以及Set和Map结构才有自己原生的Iterator接口  就是可以直接使用for of
+        //对象没有原生的Iterator接口  要自己在Symbol.iterator属性上部署  才会被for...of循环遍历
+        {
+            let obj = {
+                start: [1,2,4],
+                end: [7,6,8],
+                [Symbol.iterator]() {
+                    let index = 0;
+                    let _this = this;
+                    let arr = _this.start.concat(_this.end);
+                    let len = arr.length;
+                    return {
+                        next() {
+                            if(index < len){
+                                return {
+                                    value: arr[index++],
+                                    done: false
+                                }
+                            }else {
+                                return {
+                                    value: undefined,
+                                    done: true
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            let iter = obj[Symbol.iterator]();
+            console.log(iter.next());
+            console.log(iter.next());
+            console.log(iter.next());
+            console.log(iter.next());
+            console.log(iter.next());
+            console.log(iter.next());
+            console.log(iter.next());
+
+            for(let item of obj){
+                console.log(item);
+            }
+        }
+    </script>
+ </body>
+</html>
