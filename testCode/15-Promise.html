@@ -56,17 +56,104 @@
                 })
             }
 
-            ajax().then(function () {g
+            ajax()
+                .then(function () {
                 console.log('222');
                 return new Promise(function (resolve, reject) {
                     setTimeout(() => {
                         resolve();
                     },2000);
-                }).then(() => {
+                })
+                .then(() => {
                     console.log('333');
                 })
             })
         }
+
+        {
+            //.catch   当发生错误时要执行的内容
+            let ajax = function(num){
+                return new Promise((resolve, reject) => {
+                    if(num > 5){
+                        resolve();
+                    }else {
+                        throw new Error('出错了！');
+                    }
+                })
+            }
+            
+            ajax(6).then(function () {
+                console.log('log', 6);
+            }).catch(function (error) {
+                console.log('catch', error);
+            })
+
+            ajax(3).then(function () {
+                console.log('log', 6);
+            }).catch(function (error) {
+                console.log('catch', error);
+            })
+        }
+
+        {
+            //Promise.all()  全部加载完才执行回调函数
+            function loadImg(src) {
+                return new Promise((resolve, reject) => {
+                    let img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        resolve(img);   //传进去的img将组成数组  成为最后回调函数的形参值
+                    };
+                    img.onerror = function (err) {
+                        reject(err);
+                    }
+                })
+            }
+
+            function showImgs(imgs) {
+                imgs.forEach((img) => {
+                    document.body.appendChild(img);
+                })
+            }
+
+            //all中所有的返回值组成一个数组，传递给回调函数showImgs
+            Promise.all([
+                loadImg('https://f11.baidu.com/it/u=2465775762,1509670197&fm=72'),
+                loadImg('https://f10.baidu.com/it/u=3087422712,1174175413&fm=72'),
+                loadImg('https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=973931041,1439083005&fm=27&gp=0.jpg')
+            ]).then(showImgs);
+        }
+
+        {
+            //Promise.race()  哪个先加载完就执行  不用等全部加载完
+            function loadImg(src) {
+                return new Promise((resolve, reject) => {
+                    let img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        resolve(img);
+                    };
+                    img.onerror = function (err) {
+                        reject(err);
+                    }
+                })
+            }
+
+            function showImgs(img) {
+                let p = document.createElement('p');
+                p.appendChild(img);
+                document.body.appendChild(p);
+
+            }
+
+            Promise.race([
+                loadImg('https://f11.baidu.com/it/u=2465775762,1509670197&fm=72'),
+                loadImg('https://f10.baidu.com/it/u=3087422712,1174175413&fm=72'),
+                loadImg('https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=973931041,1439083005&fm=27&gp=0.jpg')
+            ]).then(showImgs);
+
+        }
+
     </script>
  </body>
 </html>
