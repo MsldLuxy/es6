@@ -19,7 +19,63 @@
  <body>
  
     <script>
-        
+        {
+            let tell = function* () {
+                console.log(111);
+                console.log(222);
+                console.log(yield 'hhh');//undefined
+                yield 'hello';
+                console.log(333);
+                console.log(444)
+                yield 1+2;
+                console.log(555);
+                console.log(666);
+                return 'ending';
+                console.log(777);
+            }
+            let t = tell();
+            console.log(t.next());
+            console.log('\n');
+            console.log(t.next());
+            console.log('\n');
+            console.log(t.next());
+            console.log('\n');
+            console.log(t.next());
+
+        }
+
+        {
+            //Generator循环  三个状态  无限循环
+            let state = function* (){
+                while(1){
+                    yield 'A';
+                    yield 'B';
+                    yield 'C';
+                }
+            }
+
+            /*let state = async function (){
+                while(1){
+                    await 'A';
+                    await 'B';
+                    await 'C';
+                }
+            }*/
+
+            let status = state();
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+
+        }
+
+
+        //抽奖例子
+        {
+            
+        }
     </script>
  </body>
 </html>
