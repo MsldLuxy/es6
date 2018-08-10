@@ -74,7 +74,26 @@
 
         //抽奖例子
         {
-            
+            let draw = function (count) {
+                //抽奖操作
+                console.log(`剩余抽奖次数:${count}`);
+            }
+
+            let residue = function* (count) {
+                while(count > 0){
+                    count--
+                    yield draw(count);
+                }
+            }
+
+            let star = residue(5);
+            let btn = document.createElement('button');
+            btn.id = 'start';
+            btn.textContent = '抽奖';
+            document.body.appendChild(btn);
+            document.getElementById('start').addEventListener('click',function () {
+                star.next();
+            }, false)
         }
     </script>
  </body>
