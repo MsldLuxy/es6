@@ -17,9 +17,41 @@
     </style>
  </head>
  <body>
- 
+    <script src="https://github.com/jayphelps/core-decorators.js"></script>
     <script>
-        
+        {
+            let readonly = function (target, name, descriptor) {
+                descriptor.writable = false;
+                return descriptor
+            };
+
+            class Person {
+                @readonly
+                time() {
+                    return '2018-06-06'
+                }
+            }
+
+            let person = new Person();
+            console.log(person.time());
+        }
+
+        {
+            let typename = function(target, name, descriptor) {
+                target.myname = 'hello'; //添加一个静态属性
+            }
+
+
+            //在类的外部操作  必须在类的前一句
+//            @typename
+            class Test{
+
+            }
+
+            console.log(Test.myname); //静态属性直接用类名取值
+        }
+
+        //core-decorators   第三方库
     </script>
  </body>
 </html>
